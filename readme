@@ -1,0 +1,104 @@
+# Form Submission Email API
+
+## 📌 Overview
+This is a Node.js API that receives form submissions from multiple websites and sends the submitted data via email using **Nodemailer** and **SendGrid**.
+
+## 🚀 Features
+- Receives form data via `POST` requests
+- Sends the form content via email using **SendGrid API**
+- Supports **CORS** to handle requests from different domains
+- Dockerized for easy deployment
+
+## 📂 Project Structure
+```
+/form-email-api
+│── /src
+│   │── /config
+│   │   ├── emailConfig.ts  # Configures Nodemailer with SendGrid
+│   │── /controllers
+│   │   ├── formController.ts  # Handles form submissions
+│   │── /routes
+│   │   ├── formRoutes.ts  # Defines form submission routes
+│   │── /services
+│   │   ├── emailService.ts  # Handles email sending logic
+│   │── /middlewares
+│   │   ├── validateForm.ts  # Middleware to validate form input (optional)
+│   │── /utils
+│   │   ├── logger.ts  # Custom logger (optional)
+│   │── app.ts  # Express app setup
+│   │── server.ts  # Starts the server
+│── .env  # Environment variables
+│── Dockerfile  # Docker build configuration
+│── package.json  # Dependencies and scripts
+│── README.md  # Project documentation
+```
+
+## 🛠️ Installation
+1. Clone this repository:
+   ```sh
+   git clone https://github.com/yourusername/form-email-api.git
+   cd form-email-api
+   ```
+
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+
+3. Set up environment variables:
+   Create a `.env` file in the root directory:
+   ```env
+   SENDGRID_API_KEY=your_sendgrid_api_key
+   EMAIL_FROM=your_verified_sendgrid_email@example.com
+   EMAIL_TO=recipient@example.com
+   PORT=3000
+   ```
+
+4. Start the server:
+   ```sh
+   npm run dev  # For development
+   npm start    # For production
+   ```
+
+## 🐳 Running with Docker
+1. Build the Docker image:
+   ```sh
+   docker build -t form-email-api .
+   ```
+2. Run the container:
+   ```sh
+   docker run -p 3000:3000 --env-file .env form-email-api
+   ```
+Or using Docker Compose:
+   ```sh
+   docker-compose up --build -d
+   ```
+
+## 📬 API Endpoints
+### Submit a Form
+**Endpoint:** `POST /api/forms/submit`
+
+**Request Body:**
+```json
+{
+  "name": "John Doe",
+  "email": "johndoe@example.com",
+  "message": "Hello, this is a test message!"
+}
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "message": "Email sent successfully!"
+}
+```
+
+## 📝 License
+This project is licensed under the MIT License.
+
+---
+
+Let me know if you need modifications! 🚀
+
