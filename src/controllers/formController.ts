@@ -2,6 +2,9 @@ import { Request, Response } from "express";
 import { sendEmail } from "../services/sendEmail";
 import { RequestHandler } from "express";
 
+import dotenv from "dotenv";
+dotenv.config();
+
 const handleFormSubmission: RequestHandler = async (req, res) => {
     try {
         const {email, subject, message} = req.body;
@@ -12,10 +15,10 @@ const handleFormSubmission: RequestHandler = async (req, res) => {
         }
 
         await sendEmail({
-            to: email,
+            to: process.env.TO_EMAIL as string,
             from: process.env.FROM_EMAIL as string, 
             subject,
-            text: message,
+            text: `${message} enviada por ${email}`,
             html: `<strong>${message}</strong>`,
         });
 
